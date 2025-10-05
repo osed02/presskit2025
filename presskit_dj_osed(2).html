@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DJ OSED Presskit</title>
+  <link href="https://fonts.cdnfonts.com/css/zrnic" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      background-color: #081617;
+      color: white;
+      font-family: 'Zrnic Rg', sans-serif;
+      overflow-x: hidden;
+    }
+    section {
+      padding: 0px 0;
+      width: 100%;
+      position: relative;
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    .fade-edge {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+    .fade-edge.portada::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 200px;
+      background: linear-gradient(to top, #081617, rgba(8, 22, 23, 0.2));
+      z-index: 2;
+    }
+    .fade-edge.default::before,
+    .fade-edge.default::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 200px;
+      z-index: 2;
+    }
+    .fade-edge.default::before {
+      top: 0;
+      background: linear-gradient(to bottom, #081617, rgba(8, 22, 23, 0.2));
+    }
+    .fade-edge.default::after {
+      bottom: 0;
+      background: linear-gradient(to top, #081617, rgba(8, 22, 23, 0));
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      cursor: pointer;
+    }
+    .logo-over {
+      position: absolute;
+      top: 65%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1.5);
+      max-width: 300px;
+      z-index: 3;
+      transition: transform 1s ease;
+    }
+    .logo-over.parallax {
+      will-change: transform;
+    }
+    h2, h3 {
+      font-size: 2.5em;
+      margin: 20px 0;
+    }
+    p {
+      max-width: 800px;
+      margin: 20px auto;
+      font-size: 1.4em;
+      line-height: 2em;
+      text-align: justify;
+      display: block;
+    }
+    .shadowed-text {
+      text-shadow: 0 0 10px #b2edef;
+    }
+    .info-section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 30px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .info-text {
+      flex: 1 1 45%;
+      text-align: left;
+    }
+    .info-gallery {
+      flex: 1 1 45%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      align-items: flex-start;
+      position: relative;
+    }
+    .info-gallery img {
+      height: 280px;
+      width: auto;
+      object-fit: contain;
+      transition: transform 0.3s;
+      box-shadow: 0 0 15px #b2edef;
+      border-radius: 5px;
+      position: relative;
+      margin: 0 -10px;
+    }
+    
+    
+    .info-gallery img:hover {
+      transform: scale(1.1) translateY(0) !important;
+    }
+    .info-gallery img:nth-child(odd):not(:hover) {
+      transform: translateY(-10px);
+    }
+    .info-gallery img:nth-child(even):not(:hover) {
+      transform: translateY(10px);
+    }
+    
+    
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.9);
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transition: opacity 0.3s ease;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+    }
+    .lightbox.active {
+      opacity: 1;
+      pointer-events: all;
+      display: flex;
+    }
+    .image-container {
+      position: relative;
+      width: 100%;
+      background-color: #081617;
+    }
+    .background-img.parallax-y {
+      width: 100%;
+      display: block;
+      transition: transform 1s ease;
+    }
+    .overlay-img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 40%;
+      height: auto;
+      transition: transform 1s ease;
+    }
+    .overlay-img::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 200px;
+      background: linear-gradient(to top, #081617, rgba(8, 22, 23, 0.2));
+      z-index: 2;
+      pointer-events: none;
+    }
+    .overlay-img.parallax {
+      will-change: transform;
+    }
+    h3 {
+      font-size: 1.5em;
+      margin-top: 20px;
+    }
+    .quote {
+      position: absolute;
+      top: 20px;
+      width: 100%;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- Encabezado -->
+  <section>
+    <div class="fade-edge portada">
+      <img src="img/PORTADA encabezado.jpg" alt="Portada DJ" style="transform: translateY(-80px);">
+      <img class="logo-over parallax" src="img/OSED Logo 2025.png" alt="Logo OSED">
+    </div>
+  </section>
+
+  <!-- Biografía -->
+  <section>    <h2 class="shadowed-text" style="text-align: center;">Biografía</h2>
+    <p class="shadowed-text">
+      Su gusto por la música de manera desmedida comenzaría en 2004. Aunque el interés por el arte DJ llegaría hasta 2009, comenzando a instruirse de manera autodidacta y completamente independiente.<br><br>
+      Gracias a su talento y afición indiscriminada, comenzaría a trabajar como DJ en eventos sociales y fiestas privadas. Pero sería hasta 2018 cuando un breve networking le llevó a su primera residencia en uno de los mejores clubes locales y constantes contratos en diferentes clubes de la zona, haciéndose de una auténtica reputación.
+    </p>
+  </section>
+
+  <!-- Imagen media -->
+  <section>
+    <div class="image-container fade-edge default">
+        <img class="background-img parallax-y" src="img/FONDO residencial.png" alt="Fondo Residencial">
+        <img class="overlay-img parallax" src="img/Osed Imagen media.png" alt="Imagen Media">
+      </div>
+</section>
+
+  <!-- Info DJ + Galería -->
+  
+  <div class="info-section">
+    <div class="info-text">
+      <h2 class="shadowed-text">DJ Info</h2>
+      <p class="shadowed-text">
+        NOMBRE: Oscar Martínez<br>
+        EDAD: 31 años<br>
+        GÉNERO (S): House, Reggaetón, Pop, Hip-Hop & Tech House<br>
+        CATEGORÍA: DJ Club (Open Format)<br>
+        TRAYECTORIA: 2010 - Actualidad<br>
+        RESIDENCIA: Ciudad Juárez, MX
+      </p>
+    </div>
+    <div class="info-gallery">
+      <img src="img/IMAGEN 2.png" alt="Imagen 2" style="height: 310px; width: auto; object-fit: contain; transition: transform 0.3s; box-shadow: 0 0 15px #b2edef; border-radius: 5px; margin: 50px -10px 0 -10px;">
+    </div>
+  </div>
+  <div class="info-gallery"style="margin-bottom: 50px;">
+    <img src="img/IMAGEN 1.png" alt="Imagen 1" style="max-width: 15%;">
+    <img src="img/IMAGEN 4.png" alt="Imagen 4" style="max-width: 15%;">
+    <img src="img/IMAGEN 5.png" alt="Imagen 5" style="height: 280px; width: auto; object-fit: contain; transition: transform 0.3s; box-shadow: 0 0 15px #b2edef; border-radius: 5px; margin: 0 -10px;">
+    <img src="img/IMAGEN 3.png" alt="Imagen 3" style="max-width: 15%;">
+  </div>
+
+  <!-- Imagen media 2 + Frase final -->
+  <section>
+    <div class="fade-edge default">
+      <div class="image-container">
+  <img class="background-img parallax-y" src="img/Fondo Calle.png" alt="Fondo Calle">
+  <img class="overlay-img parallax" style="top: 40%;" src="img/Osed Imagen Media 2.png" alt="Imagen Media 2">
+  <div style="position: absolute; top: 70%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: 100%; pointer-events: none;">
+    <h3 class="shadowed-text" style="font-size: 2em; color: white; text-shadow: 0 0 20px #b2edef;">"El amor por la música me pondrá en el lugar correcto"</h3>
+  </div>
+</div>
+  </section>
+
+    <!-- Residencias -->
+<section>
+  <div class="image-container">
+    <img class="background-img parallax-y" src="img/FONDO plantas.png" alt="Fondo plantas">
+    <div style="position: absolute; top: 10%; left: 50%; transform: translate(-50%, 0); text-align: center; width: 100%;">
+      <h2 class="shadowed-text" style="font-size: 2.5em; color: white; text-shadow: 0 0 20px #b2edef;">Residencias</h2>
+    </div>
+    <div class="info-gallery" style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, 0); display: grid; grid-template-columns: repeat(3, 1fr); grid-column-gap: 0px; grid-row-gap: 0px; width: 100%; justify-items: center;">
+      <img src="img/LOGO BENDITA.png" alt="Logo Bendita" style="box-shadow: none; height: 200px;">
+      <img src="img/LOGO PANIC BOTANIC.png" alt="Logo Panic Botanic" style="box-shadow: none; height: 200px;">
+      <img src="img/LOGO SOMA.png" alt="Logo Soma" style="box-shadow: none; height: 180px;">
+      <img src="img/LOGO TOP.png" alt="Logo Top" style="box-shadow: none; height: 200px;">
+      <img src="img/LOGO TUSSY.png" alt="Logo Tussy" style="box-shadow: none; height: 200px;">
+      <img src="img/LOGO BLACK BAR.png" alt="Logo Black Bar" style="box-shadow: none; height: 200px;">
+      <img src="img/LOGO PATIO CENTRAL.png" alt="Logo Patio Central" style="box-shadow: none; height: 180px;">
+      <img src="img/LOGO KARMA.png" alt="Logo Karma" style="box-shadow: none; height: 250px;">
+      <img src="img/LOGO THE CLUB.png" alt="Logo The Club" style="box-shadow: none; height: 200px;">
+    </div>
+  </div>
+</section>
+
+  <div class="lightbox" id="lightbox">
+  <span id="closeLightbox" style="position:absolute;top:20px;right:30px;font-size:40px;color:white;cursor:pointer;z-index:10000;">&times;</span>
+  <img src="" alt="Imagen ampliada">
+</div>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.utils.toArray("section").forEach(section => {
+      gsap.to(section, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+          toggleActions: "play none none none"
+        }
+      });
+    });
+
+    
+    gsap.to(".info-text", {
+      scrollTrigger: {
+        trigger: ".info-text",
+        start: "top 80%",
+        end: "top 20%",
+        scrub: true
+      },
+      rotateY: 20,
+      ease: "none"
+    });
+
+    const parallaxLogo = document.querySelector('.logo-over.parallax');
+    const overlayParallax = document.querySelectorAll('.overlay-img.parallax');
+    const backgroundParallaxY = document.querySelectorAll('.background-img.parallax-y');
+
+    window.addEventListener('scroll', () => {
+      let offset = window.scrollY * 0.3;
+      parallaxLogo.style.transform = `translate(-50%, calc(-50% + ${offset}px)) scale(1.5)`;
+      overlayParallax.forEach(img => {
+        img.style.transform = `translate(-50%, calc(-50% + ${offset * 0.2}px))`;
+      });
+      backgroundParallaxY.forEach(img => {
+        img.style.transform = `translateY(${offset * 0.05}px)`;
+      });
+    });
+    
+
+    const images = document.querySelectorAll('.info-gallery img');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = lightbox.querySelector('img');
+
+images.forEach(img => {
+  img.addEventListener('click', () => {
+    lightboxImg.src = img.src;
+    lightbox.classList.add('active');
+    gsap.fromTo(lightbox, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" });
+    gsap.fromTo(lightboxImg, { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "power2.out" });
+  });
+});
+
+lightbox.addEventListener('click', (e) => {
+  if(e.target.id === 'lightbox' || e.target.id === 'closeLightbox') {
+    gsap.to(lightboxImg, { scale: 0.8, opacity: 0, duration: 0.3, ease: "power2.in" });
+    gsap.to(lightbox, { opacity: 0, duration: 0.3, ease: "power2.in", onComplete: () => {
+      lightbox.classList.remove('active');
+    }});
+  }
+});
+  
+  </script>
+
+<audio id="audio-bendita" src="audios/AUDIO BENDITA.mp3"></audio>
+<script>
+  document.querySelector('img[alt="Logo Bendita"]').addEventListener('click', () => {
+    document.getElementById('audio-bendita').play();
+  });
+</script>
+$1
+</html>

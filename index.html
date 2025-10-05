@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Página Demo Estilo Rockstar</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: rgb(5, 20, 19);
+      color: white;
+      overflow-x: hidden;
+    }
+    section {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    img.logo {
+      width: 300px;
+      max-width: 80%;
+      margin-bottom: 30px;
+      opacity: 0;
+      animation: fadeIn 2s forwards;
+    }
+    h1, h2 {
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeIn 2s forwards;
+      animation-delay: 1s;
+    }
+    p {
+      max-width: 600px;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeIn 2s forwards;
+      animation-delay: 2s;
+    }
+    img.content-img {
+      width: 80%;
+      max-width: 800px;
+      margin: 20px 0;
+      border-radius: 10px;
+      opacity: 0;
+      animation: fadeIn 2s forwards;
+      animation-delay: 3s;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    /* Scroll Fade Animations */
+    .fade-scroll {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+    }
+    .fade-scroll.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    footer {
+      color:rgb(155, 208, 255)
+      text-align: center;
+      padding: 4px 0;
+      position: center;
+      width: 100%;
+      bottom: 0;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Sección Principal -->
+  <section>
+    <img src="img/Principal junto a LOGO.png" alt="Princilal junto a logo" width="400" class="logo">
+    <h1>DJ • DESIGNER • PRODUCER</h1>
+    <p>Ciudad Juárez, MX</p>
+  </section>
+
+  <!-- Sección 2: Imagen + Texto -->
+  <section class="fade-scroll">
+    <h2>Primera Imagen de Contenido</h2>
+    <img src="https://picsum.photos/800/400" alt="Imagen de muestra" class="content-img">
+    <p>Descripción corta de esta imagen o sección. Aquí podrías hablar de una característica principal, el concepto o la visión de tu proyecto.</p>
+  </section>
+
+  <!-- Sección 3: Imagen + Texto -->
+  <section class="fade-scroll">
+    <h2>Segunda Imagen o Anuncio</h2>
+    <img src="https://picsum.photos/800/400?2" alt="Imagen de muestra 2" class="content-img">
+    <p>Otra sección donde expliques una fecha importante, una ciudad, un evento especial o alguna colaboración destacada.</p>
+  </section>
+
+  <!-- Sección 4: Call to Action -->
+  <section class="fade-scroll">
+    <h2>Próximamente</h2>
+    <p>Suscríbete o sigue nuestras redes para no perderte el anuncio oficial.</p>
+  </section>
+
+  <script>
+    // Efecto de aparición al hacer scroll
+    const faders = document.querySelectorAll('.fade-scroll');
+
+    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('show');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.2 });
+
+    faders.forEach(fader => {
+      appearOnScroll.observe(fader);
+    });
+  </script>
+
+<footer>
+  <nav>
+    <ul>
+      <li><a href="https://www.instagram.com/dj.osed/">Instagram</a></li>
+<footer>
+
+</body>
+</html>
